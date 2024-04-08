@@ -5,12 +5,13 @@ The main `PositionHandler` currently uses an Octree implementation.
 
 ## Using PositionEvents with your Blish-Hud module
 > [!WARNING]
-> You should not directly use this library inside your module. Please use the provided Position Events Module as
+> You should not directly use this library inside your module. Please use the provided
+> [Position Events Module](https://github.com/Flyga-M/PositionEventsModule) as
 > a dependency instead. It's more efficient if multiple modules use the same `PositionHandler`. The module also
 > provides some debug functionality on top.
 
 1. Add the PositionEvents Package as a reference to your module. It is available as a [NuGet](https://www.nuget.org/packages/PositionEvents) package.
-2. Add the Position Events Module as a reference to your module.
+2. Add the Position Events Module [.dll](https://github.com/Flyga-M/PositionEventsModule/releases/) as a reference to your module.
 3. Add the Position Events Module as a dependency to your module manifest.
 4. Retrieve a reference to the Position Events Module instance during your `LoadAsync` method.
 5. Register your desired areas with the Position Events Module.
