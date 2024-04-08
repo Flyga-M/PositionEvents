@@ -21,6 +21,13 @@ namespace PositionEvents.Area
             _bounds = BoundingBox.CreateFromSphere(_sphere);
         }
 
+        public BoundingObjectSphere(Vector3 center, float radius)
+        {
+            _sphere = new BoundingSphere(center, radius);
+
+            _bounds = BoundingBox.CreateFromSphere(_sphere);
+        }
+
         public bool Contains(Vector3 position)
         {
             return _sphere.Contains(position) != ContainmentType.Disjoint;

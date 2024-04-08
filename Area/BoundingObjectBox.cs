@@ -15,6 +15,11 @@ namespace PositionEvents.Area
             _box = box;
         }
 
+        public BoundingObjectBox(Vector3 min, Vector3 max)
+        {
+            _box = new BoundingBox(min, max);
+        }
+
         public bool Contains(Vector3 position)
         {
             return _box.Contains(position) != ContainmentType.Disjoint;
