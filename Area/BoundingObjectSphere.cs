@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace PositionEvents.Area
 {
@@ -8,12 +9,15 @@ namespace PositionEvents.Area
 
         private readonly BoundingBox _bounds;
 
+        [JsonIgnore]
         public BoundingBox Bounds => _bounds;
 
+        [JsonIgnore]
         public bool IsComplex => false;
 
         public BoundingSphere Sphere => _sphere;
 
+        [JsonConstructor]
         public BoundingObjectSphere(BoundingSphere sphere)
         {
             _sphere = sphere;

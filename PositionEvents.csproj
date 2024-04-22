@@ -170,6 +170,8 @@
     <Compile Include="Area\BoundingObjectGroupUnion.cs" />
     <Compile Include="Area\BoundingObjectPrism.cs" />
     <Compile Include="Area\BoundingObjectSphere.cs" />
+    <Compile Include="Area\JSON\BasicConverter.cs" />
+    <Compile Include="Area\JSON\BoundingObjectConverter.cs" />
     <Compile Include="Area\_Builder\BoundingObjectBuilder.cs" />
     <Compile Include="Area\_Extensions\BoundingBoxExtensions.cs" />
     <Compile Include="Area\_Interfaces\IBoundingObject.cs" />

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,7 @@ namespace PositionEvents.Area
         /// </summary>
         public IEnumerable<IBoundingObject> Negatives => _negatives.ToArray(); // .ToArray(), so a copy instead of the internal list is returned
 
+        [JsonIgnore]
         public int Count
         {
             get
@@ -65,6 +67,7 @@ namespace PositionEvents.Area
         /// Attention: Just returns the bounds of the <see cref="Positive"/> component. In many cases this is 
         /// not the smallest possible Bounding Box.
         /// </summary>
+        [JsonIgnore]
         public BoundingBox Bounds => _bounds;
 
         public bool IsComplex => _isComplex;
@@ -97,6 +100,7 @@ namespace PositionEvents.Area
             _isComplex = isComplex;
         }
 
+        [JsonConstructor]
         public BoundingObjectGroupDifference(IBoundingObject positive, IEnumerable<IBoundingObject> negatives, bool isComplex = true)
         {
             _positive = positive;

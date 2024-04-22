@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace PositionEvents.Area
 {
@@ -14,6 +15,7 @@ namespace PositionEvents.Area
         /// The amount of <see cref="IBoundingObject">IBoundingObjects</see> that are contained in this 
         /// <see cref="IBoundingObjectGroup"/>.
         /// </summary>
+        [JsonIgnore]
         int Count { get; }
 
         /// <summary>

@@ -1,15 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace PositionEvents.Area
 {
     public interface IBoundingObject
-    {   
+    {
         /// <summary>
         /// A <see cref="BoundingBox"/> that fully contains this <see cref="IBoundingObject"/>. Might not be the 
         /// smallest possible Bounding Box, depending on implementation or complexity. The closer the 
         /// Bounding Box is to the actual dimensions of the <see cref="IBoundingObject"/>, the more accurately it 
         /// can be placed in the <see cref="OcTree"/>.
         /// </summary>
+        [JsonIgnore]
         BoundingBox Bounds { get; }
 
         /// <summary>

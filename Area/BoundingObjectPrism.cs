@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using MonoGame.Extended.Shapes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace PositionEvents.Area
         /// </summary>
         public Axis3 Alignment => _alignment;
 
+        [JsonIgnore]
         public BoundingBox Bounds => _bounds;
 
         public bool IsComplex => _isComplex;
@@ -73,6 +75,7 @@ namespace PositionEvents.Area
             _bounds = new BoundingBox(boundsMin, boundsMax);
         }
 
+        [JsonConstructor]
         public BoundingObjectPrism(float top, float bottom, Polygon polygon, Axis3 alignment = Axis3.Z, bool isComplex = true)
         {
             if (top <= bottom)

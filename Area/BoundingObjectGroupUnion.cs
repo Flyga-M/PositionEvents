@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,8 +15,10 @@ namespace PositionEvents.Area
 
         public IEnumerable<IBoundingObject> Content => _content.ToArray();
 
+        [JsonIgnore]
         public int Count => _content.Count;
 
+        [JsonIgnore]
         public BoundingBox Bounds => _bounds;
 
         public bool IsComplex => _isComplex;
@@ -29,6 +32,7 @@ namespace PositionEvents.Area
             _isComplex = isComplex;
         }
 
+        [JsonConstructor]
         public BoundingObjectGroupUnion(IEnumerable<IBoundingObject> content, bool isComplex = true)
         {
             _content = content.ToList();
