@@ -172,6 +172,7 @@
     <Compile Include="Area\BoundingObjectSphere.cs" />
     <Compile Include="Area\JSON\BasicConverter.cs" />
     <Compile Include="Area\JSON\BoundingObjectConverter.cs" />
+    <Compile Include="Area\JSON\ReadOnlyBasicConverter.cs" />
     <Compile Include="Area\_Builder\BoundingObjectBuilder.cs" />
     <Compile Include="Area\_Extensions\BoundingBoxExtensions.cs" />
     <Compile Include="Area\_Interfaces\IBoundingObject.cs" />

@@ -8,7 +8,7 @@ namespace PositionEvents.Area.JSON
 {
     public class BoundingObjectConverter : BasicConverter<IBoundingObject>
     {
-        internal static BoundingObjectConverter Default = new BoundingObjectConverter();
+        public static ReadOnlyBasicConverter<IBoundingObject> Default = new ReadOnlyBasicConverter<IBoundingObject>(new BoundingObjectConverter());
 
         public BoundingObjectConverter() : base(GetSubTypes())
         {
