@@ -68,7 +68,8 @@ namespace PositionEvents.Area.JSON
         public override bool CanConvert(Type objectType)
         {
             return objectType.IsSubclassOf(typeof(TBase))
-                || objectType == typeof(TBase);
+                || objectType == typeof(TBase)
+                || typeof(TBase).IsAssignableFrom(objectType);
         }
 
         /// <exception cref="JsonSerializationException"></exception>

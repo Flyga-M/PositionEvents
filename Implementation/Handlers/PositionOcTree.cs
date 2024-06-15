@@ -58,7 +58,7 @@ namespace PositionEvents.Implementation.Handlers
             if (!_ocTrees.ContainsKey(mapId))
             {
                 return;
-            }
+            }   
 
             IBoundingObject[] containingBoundingObjects = _ocTrees[mapId].GetContaining(position);
 

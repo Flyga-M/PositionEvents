@@ -32,7 +32,7 @@ namespace PositionEvents.Area.JSON
             if (!CanConvert(subType))
             {
                 throw new ArgumentException("subType must be convertable by " +
-                    $"the converter (subclass of or type {nameof(TBase)})", nameof(subType));
+                    $"the converter (subclass of or type {typeof(TBase)})", nameof(subType));
             }
             if (_subTypes.ContainsKey(typeString))
             {
