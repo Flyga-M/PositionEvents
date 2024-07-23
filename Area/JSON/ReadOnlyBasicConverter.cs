@@ -93,7 +93,22 @@ namespace PositionEvents.Area.JSON
                     $"implementation.");
             }
 
-            return JsonConvert.DeserializeObject(@base.ToString(), _subTypes[typeString]);
+            // need to copy over converters, so properties that need converters can still be property converterted.
+            IList<JsonConverter> converters = serializer.Converters;
+            converters.ToArray().Any(converter =>
+            {
+                if (converter.GetType() == this.GetType())
+                {
+                    // remove itself, to prevent a recursive loop
+                    converters.Remove(converter);
+                    return true;
+                }
+                return false;
+            });
+
+            JsonSerializerSettings setting = new JsonSerializerSettings() { Converters = converters };
+
+            return JsonConvert.DeserializeObject(@base.ToString(), _subTypes[typeString], setting);
 
             // causes a recursive loop
             //return serializer.Deserialize(reader, _subTypes[typeString]);
@@ -110,7 +125,23 @@ namespace PositionEvents.Area.JSON
 
             string typeString = _subTypesSwapped[type];
 
-            JObject @base = JObject.FromObject(value);
+            // need to copy over converters, so properties that need converters can still be property converterted.
+            IList<JsonConverter> converters = serializer.Converters;
+            converters.ToArray().Any(converter =>
+            {
+                if (converter.GetType() == this.GetType())
+                {
+                    // remove itself, to prevent a recursive loop
+                    converters.Remove(converter);
+                    return true;
+                }
+                return false;
+            });
+            JsonSerializerSettings setting = new JsonSerializerSettings() { Converters = converters };
+            // need a new serializer to not create a recursive loop
+            JsonSerializer newSerializer = JsonSerializer.Create(setting);
+
+            JObject @base = JObject.FromObject(value, newSerializer);
 
             @base.Add(TYPE_KEY, typeString);
 
