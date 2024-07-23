@@ -76,6 +76,11 @@ namespace PositionEvents.Area.JSON
         /// <exception cref="NotImplementedException"></exception>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+            
             JObject @base = JObject.Load(reader);
 
             if (!@base.ContainsKey(TYPE_KEY))
@@ -116,6 +121,12 @@ namespace PositionEvents.Area.JSON
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
+            if (value == null)
+            {
+                writer.WriteNull();
+                return;
+            }
+            
             Type type = value.GetType();
 
             if (!_subTypesSwapped.ContainsKey(type))
