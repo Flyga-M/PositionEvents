@@ -99,7 +99,7 @@ namespace PositionEvents.Area.JSON
             }
 
             // need to copy over converters, so properties that need converters can still be property converterted.
-            IList<JsonConverter> converters = serializer.Converters;
+            IList<JsonConverter> converters = serializer.Converters.ToList(); // make copy
             converters.ToArray().Any(converter =>
             {
                 if (converter.GetType() == this.GetType())
@@ -137,7 +137,7 @@ namespace PositionEvents.Area.JSON
             string typeString = _subTypesSwapped[type];
 
             // need to copy over converters, so properties that need converters can still be property converterted.
-            IList<JsonConverter> converters = serializer.Converters;
+            IList<JsonConverter> converters = serializer.Converters.ToList(); // make copy
             converters.ToArray().Any(converter =>
             {
                 if (converter.GetType() == this.GetType())
