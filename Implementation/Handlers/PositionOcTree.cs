@@ -58,39 +58,42 @@ namespace PositionEvents.Implementation.Handlers
             if (!_ocTrees.ContainsKey(mapId))
             {
                 return;
-            }   
+            }
+
+            // copy the current state of _objectData, in case it get's modified while update is still ongoing.
+            Dictionary<IBoundingObject, ObjectData> currentObjectData = _objectData.ToDictionary(current => current.Key, current => current.Value);
 
             IBoundingObject[] containingBoundingObjects = _ocTrees[mapId].GetContaining(position);
 
             foreach(IBoundingObject containingBoundingObject in containingBoundingObjects)
             {
-                if (!_objectData.ContainsKey(containingBoundingObject))
+                if (!currentObjectData.ContainsKey(containingBoundingObject))
                 {
                     throw new ArgumentOutOfRangeException(nameof(containingBoundingObject), "Can't invoke callback or change " +
                         "state for bounding object, that " +
                         "is not contained in _objectData.");
                 }
 
-                ObjectData data = _objectData[containingBoundingObject];
+                ObjectData data = currentObjectData[containingBoundingObject];
 
                 data.SetState(true, positionData);
             }
 
-            IEnumerable<IBoundingObject> leftBoundingObjects = _objectData
+            IEnumerable<IBoundingObject> leftBoundingObjects = currentObjectData
                 .Where(keyValuePair => keyValuePair.Value.IsContained)
                 .Select(keyValuePair => keyValuePair.Key)
                 .Except(containingBoundingObjects);
 
             foreach(IBoundingObject leftBoundingObject in leftBoundingObjects)
             {
-                if (!_objectData.ContainsKey(leftBoundingObject))
+                if (!currentObjectData.ContainsKey(leftBoundingObject))
                 {
                     throw new ArgumentOutOfRangeException(nameof(leftBoundingObject), "Can't invoke callback or change " +
                         "state for bounding object, that " +
                         "is not contained in _objectData.");
                 }
 
-                ObjectData data = _objectData[leftBoundingObject];
+                ObjectData data = currentObjectData[leftBoundingObject];
 
                 data.SetState(false, positionData);
             }
