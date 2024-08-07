@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using PositionEvents.Area;
+using System.Collections.Concurrent;
 
 namespace PositionEvents.Implementation.Handlers
 {
@@ -18,7 +19,7 @@ namespace PositionEvents.Implementation.Handlers
 
         private readonly Dictionary<int, OcTree.OcTree> _ocTrees = new Dictionary<int, OcTree.OcTree>();
 
-        private readonly Dictionary<IBoundingObject, ObjectData> _objectData = new Dictionary<IBoundingObject, ObjectData>();
+        private readonly ConcurrentDictionary<IBoundingObject, ObjectData> _objectData = new ConcurrentDictionary<IBoundingObject, ObjectData>();
 
         public PositionOcTree(EventHandler<PositionData> mapChanged)
         {
@@ -130,7 +131,7 @@ namespace PositionEvents.Implementation.Handlers
                 return false;
             }
 
-            return _objectData.Remove(boundingObject);
+            return _objectData.TryRemove(boundingObject, out ObjectData _);
         }
 
         public void Clear()
